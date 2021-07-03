@@ -10,9 +10,10 @@ SPOTIFY_AUTHORIZATION = spotify_auth.get_bearer_token()
 
 app = Flask(__name__)
 
+
 @app.route("/")
 def home():
-    return render_template('index.html')
+    return render_template("index.html")
 
 
 @app.route("/album")
