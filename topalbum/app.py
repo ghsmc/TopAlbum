@@ -2,6 +2,7 @@ from flask import Flask, render_template
 from dotenv import load_dotenv
 import os
 import requests
+import random
 import spotify_auth
 
 load_dotenv()
@@ -21,7 +22,7 @@ def getalbum():
     album_information = requests.get(
         "https://api.spotify.com/v1/albums",
         params={
-            "ids": "382ObEPsp2rxGrnsizN5TX,1A2GTWGtFfWp7KSQTwWOyo,2noRn2Aes5aoNVsU6iWThc",
+            "ids": "4aawyAB9vmqN3uQ7FjRGTy,0sNOF9WDwhWunNAHPD3Baj"
         },
         headers={"Authorization": SPOTIFY_AUTHORIZATION},
     ).json()
@@ -48,6 +49,11 @@ def getalbum():
             + albumcover
             + '">'
         )
+
+
+
+
+    spotifyids = "79dL7FLiJFOO0EoehUHQBv",  
 
     return response
 
