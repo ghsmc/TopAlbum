@@ -14,48 +14,27 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return render_template("index.html")
-
-
-@app.route("/album")
-def getalbum():
     album_information = requests.get(
         "https://api.spotify.com/v1/albums",
-        params={
-            "ids": "4aawyAB9vmqN3uQ7FjRGTy,0sNOF9WDwhWunNAHPD3Baj"
-        },
+        params={"ids": "4aawyAB9vmqN3uQ7FjRGTy,0sNOF9WDwhWunNAHPD3Baj"},
         headers={"Authorization": SPOTIFY_AUTHORIZATION},
     ).json()
     print(album_information)
     albums = album_information["albums"]
 
-    response = ""
+    #   artistname = album["artists"][0]["name"]
+    #     albumname = album["name"]
+    #     albumcover = album["images"][0]["url"]
+    #     albumpopularity = album["popularity"]
+        
+    # move code from getalbum here, reference them
+    #pass an array of dictionaries
 
-    for album in albums:
-        artistname = album["artists"][0]["name"]
-        albumname = album["name"]
-        albumcover = album["images"][0]["url"]
-        albumpopularity = album["popularity"]
-        response = (
-            response
-            + "<p>"
-            + albumname
-            + " "
-            + "("
-            + str(albumpopularity)
-            + ")"
-            + "</p>"
-            + '<img src="'
-            + albumcover
-            + '">'
-        )
+    n = random.randint(0,22)
+    
 
+    return render_template("index.html", albums=albums)
 
-
-
-    spotifyids = "79dL7FLiJFOO0EoehUHQBv",  
-
-    return response
 
 
 app.run(debug=True)

@@ -5,6 +5,7 @@
     <title>TopAlbum</title>
     <meta name="description" content="Our first page">
     <meta name="keywords" content="html tutorial template">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 
 </head>
 
@@ -20,14 +21,32 @@
         <div class="wrapper">
             <h1 class=question>
                 Which is more popular?
-            </h1>
-            <div class="center">
-                <span class="align-left"><img src="https://i.scdn.co/image/8b662d81966a0ec40dc10563807696a8479cd48b"  style="width:200px;height:200px" class="albumcover1"></span>
-                <span id="sign" class="middle-sign"> ? </span>
-                <span class="align-right"><img src="https://i.scdn.co/image/eb6f0b2594d81f8d9dced193f3e9a3bc4318aedc" class="albumcover2" style="width:200px;height:200px" ></span>
-            </div>
 
-          
+                <div class="grid grid-flow-row max-w-2xl mx-auto">
+                    {% for album in albums %}
+
+                    <div>
+                    {{album["name"]}} ({{album["popularity"]}})
+                    </div>
+                   
+                
+                    <div>
+                        <img src="{{album['images'][0]['url']}}" width="200" height="200">
+                    </div>
+                    
+
+                    <div>
+                        {% for artist in album["artists"] %}
+                            {{artist["name"]}} 
+                        {% endfor %}
+                    </div>
+                        
+
+                    {% endfor %}
+                </div>
+
+
+
         </div>
 
         <div class="footer">
@@ -93,15 +112,12 @@
 
         .wrapper {
             padding: 2rem;
-            background-color: rgba(0, 89, 255, 0.39);
-            max-width: 40rem;
             margin-left: auto;
             margin-right: auto;
             padding-bottom: 10rem;
         }
 
         .question {
-            max-width: 40rem;
             margin-left: auto;
             margin-right: auto;
             font-size: 1.5rem;
