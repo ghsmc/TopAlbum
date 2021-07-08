@@ -9,132 +9,90 @@
 
 </head>
 
-<body>
+<body class="max-w-2xl mx-auto bg-blue-700 text-white">
     <div>
-        <div>
-            <h1 class="mainheader">TopAlbum</h1>
-            <h1 class="maincaption">
-                We give you to albums, you tell us which is more popular.
-            </h1>
+        <h1 class="text-4xl font-bold text-center text-white pt-6">TopAlbum</h1>
+        <h1 class="text-xl text-center">
+            We give you to albums, you tell us which is more popular.
+        </h1>
+    </div>
+
+
+    <h1 class="text-2xl text-center p-3 bg-blue-600 max-w-2xl mx-auto mt-6"> Which is more popular?</h1>
+
+    <div class="grid grid-flow-col grid-cols-2 grid-rows-2 max-w-2xl mx-auto">
+
+        <div class="ml-5 mt-6 p-8 hover:bg-blue-600" onclick="album1();">
+            <img src="{{image1}}" width="300" height="300">
         </div>
 
-        <div class="wrapper">
-            <h1 class=question>
-                Which is more popular?
-
-                <div class="grid grid-flow-row max-w-2xl mx-auto">
-                    {% for album in albums %}
-
-                    <div>
-                    {{album["name"]}} ({{album["popularity"]}})
-                    </div>
-                   
-                
-                    <div>
-                        <img src="{{album['images'][0]['url']}}" width="200" height="200">
-                    </div>
-                    
-
-                    <div>
-                        {% for artist in album["artists"] %}
-                            {{artist["name"]}} 
-                        {% endfor %}
-                    </div>
-                        
-
-                    {% endfor %}
-                </div>
-
-
-
+        <div class="text-xl mt-4 text-center font-mono">
+            {{name1}} 
         </div>
 
-        <div class="footer">
-            <span class="align-left">
-                Data from <a class="bottomlinks">Spotify API.</a> Built by <a class="bottomlinks">George McCain</a> and
-                <a class="bottomlinks">John McGarry</a>
-            </span>
+
+        <div class="ml-5 mt-6 p-8 hover:bg-blue-600" onclick="album2();">
+            <img src="{{image2}}" width="300" height="300">
         </div>
+
+        <div class="text-md mt-4 text-center font-mono">
+            {{name2}} 
+        </div>
+    </div>
+
+    <div>
+        <h1 class="text-2xl font-mono">Score:<span id="score"></span></h1>
 
     </div>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serifd;
-            color: white;
-            background-color: rgba(0, 0, 122, 0.904);
+
+
+
+
+    <div class="footer">
+        <span class="align-left">
+            Data from <a class="pt-10">Spotify API.</a> Built by <a class="bottomlinks">George McCain</a> and
+            <a class="bottomlinks">John McGarry</a>
+        </span>
+    </div>
+
+    <script>
+        localStorage = window.localStorage;
+        localStorage.setItem("score", i);
+
+        function album1() { 
+            if ( {{popularity1}} > {{popularity2}} ) {
+                alert("You won!");
+                i++;
+                location.reload();
+            } else if ({{popularity2}} > {{popularity1}}) {
+                alert("You lose!");
+                i--;
+                location.reload();
+            }
         }
 
-        .albumcover1 {
-            padding-left: 2rem;
+        function album2() { 
+            if ( {{popularity1}} < {{popularity2}} ) {
+                alert("You won!");
+                i++;
+                location.reload();
+            } else if ({{popularity2}} < {{popularity1}}) {
+                alert("You lose!");
+                i--;
+                location.reload();
+            }
         }
 
+        document.getElementById("score").append(toString(i));
 
-        .albumcover2 {
-            padding-right: 2rem;
-        }
+   
 
-        .center {
-            text-align: center;
-        }
 
-        .middle-sign {
-            font-size: 6rem;
-            font-weight: bold;
-        }
 
-        .footer {
-            position: absolute;
-            bottom: 0;
-            background-color: rgba(0, 0, 122, 0.904);
-        }
 
-        .align-right {
-            float: right;
-        }
-
-        .align-left {
-            float: left;
-        }
-
-        a {
-            all: unset;
-        }
-
-        .mainheader {
-            margin-bottom: 0;
-            text-align: center;
-        }
-
-        .bottomlinks {
-            font-weight: bold;
-            text-decoration: underline;
-        }
-
-        .wrapper {
-            padding: 2rem;
-            margin-left: auto;
-            margin-right: auto;
-            padding-bottom: 10rem;
-        }
-
-        .question {
-            margin-left: auto;
-            margin-right: auto;
-            font-size: 1.5rem;
-        }
-
-        .maincaption {
-            font-size: 1.1rem;
-            font-weight: bold;
-            max-width: 25rem;
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: 0;
-            opacity: 0.75;
-            text-align: center;
-        }
-    </style>
-
+    </script>
+    
 </body>
 
 </html>
+
