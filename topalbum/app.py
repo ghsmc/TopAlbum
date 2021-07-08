@@ -22,16 +22,12 @@ album_information = requests.get(
 
 @app.route("/")
 def home():
-    print(album_information)
     albums = album_information["albums"]
 
-    i = random.choice(albums)
-    j = random.choice(albums)
-    while j == i:
-        j = random.choice(albums)
-
-    album1 = album_information["albums"][i]
-    album2 = album_information["albums"][j]
+    album1 = random.choice(albums)
+    album2 = random.choice(albums)
+    while album1 == album2:
+        album2 = random.choice(albums)
 
     name1 = album1["name"]
     name2 = album2["name"]

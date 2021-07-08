@@ -25,7 +25,7 @@
 
         <div class="grid grid-flow-col grid-cols-2 grid-rows-1 max-w-2xl mx-auto">
 
-            <div class="ml-5 mt-6 p-8 hover:bg-blue-600" onclick="album1();">
+            <div class="ml-5 mt-6 p-8 hover:bg-blue-600" onclick="selectAlbum(1);">
                 <img src="{{image1}}" width="300" height="300">
 
                 <div class="text-md mt-4 text-center font-mono">
@@ -37,7 +37,7 @@
 
 
 
-            <div class="ml-5 mt-6 p-8 hover:bg-blue-600" onclick="album2();">
+            <div class="ml-5 mt-6 p-8 hover:bg-blue-600" onclick="selectAlbum(2);">
                 <img src="{{image2}}" width="300" height="300">
 
                 <div class="text-md mt-4 text-center font-mono">
@@ -62,37 +62,34 @@
     </div>
 
     <script>
+        let album1 = {{album1 | tojson}};
+        let album2 = {{album2 | tojson}};
+    </script>
+
+    <script>
         score = localStorage.getItem("score");
         document.getElementById("score").innerHTML = score;
 
-        function album1() {
-            if ({{ popularity1 }} > {{ popularity2 }} ) {
+        function selectAlbum(num) {
+            let correct = true;
+            if (album1.popularity < album2.popularity) {
+                correct = num === 2;
+            } else {
+                correct = num === 1;
+            }
+
+            if (correct) {
                 score = localStorage.getItem("score");
                 score = parseInt(score)
                 score = score + 1;
                 document.getElementById("score").innerHTML = parseInt(score);
                 localStorage.setItem("score", score);
                 location.reload()
-        }   else ({{ popularity2 }} > {{ popularity1 }}) {
+            }   else  {
                 location.reload()
                 alert("Incorrect!")
                 localStorage.setItem("score", 0);
-        }   
-        }
-
-        function album2() {
-            if ({{ popularity1 }} < {{ popularity2 }} ) {
-            score = localStorage.getItem("score");
-            score = parseInt(score)
-            score = score + 1;
-            document.getElementById("score").innerHTML = score;
-            localStorage.setItem("score", score);
-            location.reload()
-        } else ({{ popularity2 }} < {{ popularity1 }}) {
-            location.reload()
-            alert("Incorrect!")
-            localStorage.setItem("score", 0);
-        } 
+            }     
         }
 
         function reset() {
@@ -100,12 +97,6 @@
         }
 
         document.getElementById("score").append(toString(i));
-
-
-
-
-
-
     </script>
 
 </body>
