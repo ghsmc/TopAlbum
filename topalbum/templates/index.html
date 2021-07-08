@@ -9,45 +9,51 @@
 
 </head>
 
-<body class="max-w-2xl mx-auto bg-blue-700 text-white">
-    <div>
-        <h1 class="text-4xl font-bold text-center text-white pt-6">TopAlbum</h1>
-        <h1 class="text-xl text-center">
-            We give you to albums, you tell us which is more popular.
-        </h1>
+<body class="mx-auto bg-blue-700 text-white">
+    <div class="max-w-2xl mx-auto">
+
+
+        <div>
+            <h1 class="text-4xl font-bold text-center text-white pt-6">TopAlbum</h1>
+            <h1 class="text-xl text-center">
+                We give you to albums, you tell us which is more popular.
+            </h1>
+        </div>
+
+
+        <h1 class="text-2xl text-center p-3 bg-blue-600 max-w-2xl mx-auto mt-6"> Which is more popular?</h1>
+
+        <div class="grid grid-flow-col grid-cols-2 grid-rows-1 max-w-2xl mx-auto">
+
+            <div class="ml-5 mt-6 p-8 hover:bg-blue-600" onclick="album1();">
+                <img src="{{image1}}" width="300" height="300">
+
+                <div class="text-md mt-4 text-center font-mono">
+                    {{name1}}
+                </div>
+
+            </div>
+
+
+
+
+            <div class="ml-5 mt-6 p-8 hover:bg-blue-600" onclick="album2();">
+                <img src="{{image2}}" width="300" height="300">
+
+                <div class="text-md mt-4 text-center font-mono">
+                    {{name2}}
+                </div>
+            </div>
+
+
+        </div>
+
+        <div>
+            <h1 class="text-2xl text-center p-3 bg-blue-600 max-w-2xl mx-auto mt-6">Score: <span id="score"></span></h1>
+
+        </div>
+
     </div>
-
-
-    <h1 class="text-2xl text-center p-3 bg-blue-600 max-w-2xl mx-auto mt-6"> Which is more popular?</h1>
-
-    <div class="grid grid-flow-col grid-cols-2 grid-rows-2 max-w-2xl mx-auto">
-
-        <div class="ml-5 mt-6 p-8 hover:bg-blue-600" onclick="album1();">
-            <img src="{{image1}}" width="300" height="300">
-        </div>
-
-        <div class="text-xl mt-4 text-center font-mono">
-            {{name1}}
-        </div>
-
-
-        <div class="ml-5 mt-6 p-8 hover:bg-blue-600" onclick="album2();">
-            <img src="{{image2}}" width="300" height="300">
-        </div>
-
-        <div class="text-md mt-4 text-center font-mono">
-            {{name2}}
-        </div>
-    </div>
-
-    <div>
-        <h1 class="text-2xl font-mono">Score:<span id="score"></span></h1>
-
-    </div>
-
-
-
-
     <div class="footer">
         <span class="align-left">
             Data from <a class="pt-10">Spotify API.</a> Built by <a class="bottomlinks">George McCain</a> and
@@ -56,7 +62,8 @@
     </div>
 
     <script>
-        score = document.getElementById("score").innerHTML;
+        score = localStorage.getItem("score");
+        document.getElementById("score").innerHTML = score;
 
         function album1() {
             if ({{ popularity1 }} > {{ popularity2 }} ) {
@@ -66,34 +73,30 @@
                 document.getElementById("score").innerHTML = parseInt(score);
                 localStorage.setItem("score", score);
                 location.reload()
-        }   else if ({{ popularity2 }} > {{ popularity1 }}) {
+        }   else ({{ popularity2 }} > {{ popularity1 }}) {
                 location.reload()
                 alert("Incorrect!")
                 localStorage.setItem("score", 0);
-        }   else {
-                location.reload()
-                alert("Incorrect!")
-                localStorage.setItem("score", 0);
-            }
+        }   
         }
 
         function album2() {
             if ({{ popularity1 }} < {{ popularity2 }} ) {
-                score = localStorage.getItem("score");
-                score = parseInt(score)
-                score = score + 1;
-                document.getElementById("score").innerHTML = score;
-                localStorage.setItem("score", score);
-                location.reload()
-            } else if ({{ popularity2 }} < {{ popularity1 }}) {
-                location.reload()
-                alert("Incorrect!")
-                localStorage.setItem("score", 0);
-            } else {
-                location.reload()
-                alert("Incorrect!")
-                localStorage.setItem("score", 0);
-            }
+            score = localStorage.getItem("score");
+            score = parseInt(score)
+            score = score + 1;
+            document.getElementById("score").innerHTML = score;
+            localStorage.setItem("score", score);
+            location.reload()
+        } else ({{ popularity2 }} < {{ popularity1 }}) {
+            location.reload()
+            alert("Incorrect!")
+            localStorage.setItem("score", 0);
+        } 
+        }
+
+        function reset() {
+            localStorage.setItem("score", 0);
         }
 
         document.getElementById("score").append(toString(i));

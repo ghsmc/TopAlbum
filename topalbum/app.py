@@ -11,29 +11,27 @@ SPOTIFY_AUTHORIZATION = spotify_auth.get_bearer_token()
 
 app = Flask(__name__)
 
+album_information = requests.get(
+    "https://api.spotify.com/v1/albums",
+    params={
+        "ids": "2vmjRfAgNyYIiFsHuUU8u9,1ATL5GLyefJaxhQzSPVrLX,0S0KGZnfBGSIssfF54WSJh,5zi7WsKlIiUXv09tbGLKsE,3arNdjotCvtiiLFfjKngMc,392p3shh2jkxUxY2VHvlH8,0ptlfJfwGTy0Yvrk14JK1I,6pwuKxMUkNg673KETsXPUV,41GuZcammIkupMPKH2OJ6I"
+    },
+    headers={"Authorization": SPOTIFY_AUTHORIZATION},
+).json()
+
 
 @app.route("/")
 def home():
-    album_information = requests.get(
-        "https://api.spotify.com/v1/albums",
-        params={"ids": "3XLn9BkDkwq4icsUye2Krp,1oNWum7uuaISS4cSgDQhWT,2If8WvHmIANFsGWDf36e2M,2vmjRfAgNyYIiFsHuUU8u9"},
-        headers={"Authorization": SPOTIFY_AUTHORIZATION},
-    ).json()
-
     print(album_information)
     albums = album_information["albums"]
 
-    i = random.randint(0, 3)
-    j=random.randint(0,3)
-    
+    i = random.choice(albums)
+    j = random.choice(albums)
     while j == i:
-        j = random.randint(0, 3)
+        j = random.choice(albums)
 
     album1 = album_information["albums"][i]
     album2 = album_information["albums"][j]
-
-    albumdate1 = album1["release_date"]
-    albumdate2 = album2["release_date"]
 
     name1 = album1["name"]
     name2 = album2["name"]
@@ -41,24 +39,23 @@ def home():
     popularity1 = album1["popularity"]
     popularity2 = album2["popularity"]
 
+    artist1 = album1["artists"]
+    aritst2 = album2["artists"]
+
     image1 = album1["images"][0]["url"]
     image2 = album2["images"][0]["url"]
 
-    
-
-    #   artistname = album["artists"][0]["name"]
-    #     albumname = album["name"]
-    #     albumcover = album["images"][0]["url"]
-    #     albumpopularity = album["popularity"]
-        
-    # move code from getalbum here, reference them
-    #pass an array of dictionaries
-
-    n = random.randint(0,22)
-    
-
-    return render_template("index.html", album1=album1, album2=album2, image1=image1, image2=image2, name1=name1, name2=name2, popularity1=popularity1, popularity2=popularity2)
-
+    return render_template(
+        "index.html",
+        album1=album1,
+        album2=album2,
+        image1=image1,
+        image2=image2,
+        name1=name1,
+        name2=name2,
+        popularity1=popularity1,
+        popularity2=popularity2,
+    )
 
 
 app.run(debug=True)
