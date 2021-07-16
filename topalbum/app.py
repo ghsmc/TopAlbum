@@ -4,7 +4,6 @@ import os
 import requests
 import random
 import spotify_auth
-
 load_dotenv()
 
 SPOTIFY_AUTHORIZATION = spotify_auth.get_bearer_token()
