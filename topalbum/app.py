@@ -34,8 +34,8 @@ def home():
     popularity1 = album1["popularity"]
     popularity2 = album2["popularity"]
 
-    artist1 = album1["artists"]
-    aritst2 = album2["artists"]
+    artist1 = album1["artists"][0]["name"]
+    artist2 = album2["artists"][0]["name"]
 
     image1 = album1["images"][0]["url"]
     image2 = album2["images"][0]["url"]
@@ -48,6 +48,8 @@ def home():
         image2=image2,
         name1=name1,
         name2=name2,
+        artist1=artist1,
+        artist2=artist2,
         popularity1=popularity1,
         popularity2=popularity2,
     )
