@@ -9,20 +9,20 @@
 
 </head>
 
-<body class="mx-auto bg-blue-700 text-white">
+<body class="mx-auto bg-gray-50 text-black">
     <div class="max-w-2xl mx-auto">
         <div>
-            <h1 class="text-4xl font-bold text-center text-white pt-6">TopAlbum</h1>
+            <h1 class="text-4xl font-bold text-black text-center pt-6">TopAlbum</h1>
             <h1 class="text-xl text-center">
                 We give you to albums, you tell us which is more popular.
             </h1>
         </div>
 
-        <h1 class="text-2xl text-center p-3 bg-blue-600 max-w-2xl mx-auto mt-6"> Which is more popular? <span class="cursor-pointer text-3xl" onclick="reset();">&nbsp; &#8634;</span></h1>
+        <h1 class="text-2xl text-center p-3 bg-gray-100 max-w-2xl mx-auto mt-6"> Which is more popular? <span class="cursor-pointer text-3xl" onclick="reset();">&nbsp; &#8634;</span></h1>
 
         <div class="grid grid-flow-col grid-cols-2 grid-rows-1 max-w-2xl mx-auto">
 
-            <div class="ml-5 mt-6 p-8 hover:bg-blue-600" onclick="selectAlbum(1);">
+            <div class="ml-5 mt-6 p-8 hover:bg-gray-200" onclick="selectAlbum(1);">
                 <img src="{{image1}}" width="300" height="300">
 
                 <div class="text-md mt-4 text-center italic">
@@ -34,7 +34,7 @@
 
 
 
-            <div class="ml-5 mt-6 p-8 hover:bg-blue-600" onclick="selectAlbum(2);">
+            <div class="ml-5 mt-6 p-8 hover:bg-gray-200" onclick="selectAlbum(2);">
                 <img src="{{image2}}" width="300" height="300">
 
                 <div class="text-md mt-4 text-center italic">
@@ -45,10 +45,10 @@
         </div>
 
         <div>
-            <h1 class="text-2xl text-left p-3 bg-blue-600 max-w-2xl mx-auto mt-6">Score: <span id="score" class="text-green-400"></span></h1>
+            <h1 class="text-2xl text-left p-3 bg-gray-100 max-w-2xl mx-auto mt-6">Score: <span id="score" class="text-green-400"></span></h1>
         </div>
 
-        <h1 class="text-4xl font-bold text-left text-white pt-6 mt-6 mb-3">About</h1>
+        <h1 class="text-4xl font-bold text-left pt-6 mt-6 mb-3">About</h1>
         <p class="text-xl">
             TopAlbum is a project built by <a class="underline" href="https://gmccain.com">George McCain</a> and John McGarry as a game to
             test music-lovers' understanding of popularity. It relies on data from the Spotify API, a tool that
